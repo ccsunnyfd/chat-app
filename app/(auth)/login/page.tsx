@@ -1,6 +1,6 @@
 'use client'
 
-import Button from '@/components/Button'
+import Button from '@/components/ui/Button'
 import { signIn } from 'next-auth/react'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
