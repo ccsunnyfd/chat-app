@@ -36,7 +36,7 @@ const AddFriendButton = () => {
         return
       }
       if (error instanceof AxiosError) {
-        setError('email', { message: error.response?.data })
+        setError('email', { message: error.response?.data?.error })
         return
       }
 
