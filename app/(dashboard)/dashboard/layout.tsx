@@ -119,7 +119,10 @@ const layout = async ({ children }: { children: ReactNode }) => {
           </ul>
         </nav>
       </div>
-      {children}
+
+      <main className="container max-h-screen w-full py-16 md:py-12">
+        {children}
+      </main>
     </div>
   )
 }
