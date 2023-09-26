@@ -5,7 +5,7 @@ import { cn, toPusherKey } from '@/lib/utils'
 import { Message } from '@/lib/validations/message'
 import { format } from 'date-fns'
 import Image from 'next/image'
-import { FC, useEffect, useState } from 'react'
+import { FC, useCallback, useEffect, useState } from 'react'
 
 interface MessagesProps {
   initialMessages: Message[]
@@ -24,12 +24,12 @@ const Messages: FC<MessagesProps> = ({
 }) => {
   const [messages, setMessages] = useState<Message[]>(initialMessages)
 
+  const messageHandler = useCallback((message: Message) => {
+    setMessages((prev) => [message, ...prev])
+  }, [])
+
   useEffect(() => {
     pusherClient.subscribe(toPusherKey(`chat:${chatId}`))
-
-    const messageHandler = (message: Message) => {
-      setMessages((prev) => [message, ...prev])
-    }
 
     pusherClient.bind('incoming-message', messageHandler)
 
@@ -37,7 +37,7 @@ const Messages: FC<MessagesProps> = ({
       pusherClient.unsubscribe(toPusherKey(`chat:${chatId}`))
       pusherClient.unbind('incoming-message', messageHandler)
     }
-  }, [chatId])
+  }, [chatId, messageHandler])
 
   const formatTimestamp = (timestamp: number) => {
     return format(timestamp, 'HH:mm')
