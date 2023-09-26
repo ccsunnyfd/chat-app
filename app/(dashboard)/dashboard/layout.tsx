@@ -9,7 +9,7 @@ import { notFound } from 'next/navigation'
 import FriendRequestSidebarOptions from '@/components/FriendRequestsSidebarOptions'
 import { fetchRedis } from '@/helpers/redis'
 import { getFriendsByUserId } from '@/helpers/get-friends-by-user-id'
-import SidebarChatList from '@/components/SidebarChartList'
+import SidebarChatList from '@/components/SidebarChatList'
 
 interface SidebarOption {
   id: number
